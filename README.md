@@ -1,2 +1,2 @@
 # pyscript_tictactoe
-a mini Python project that uses PyScript as the framework
+a mini project that uses PyScript to convert Python code
