@@ -1,0 +1,57 @@
+/* colors */
+:root {
+    --matcha-green: #A8C686;
+    --sage-green: #D8E7C5;
+    --olive-green: #6F7741;
+
+    --cream: #FFF8F0;
+    --warm-white: #F8F5EF;
+
+    --blush-pink: #F7C6D9;
+    --rose-pink: #DDA5B6;
+    --brown: #6B4F3B;
+} 
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin: 20px;
+    background-color: #F8F5EF;
+}
+
+h1 {
+    color: #6B4F3B;
+}
+
+.board {
+    display: inline-block;
+    margin: 20px auto;
+    border: 2px solid #6B4F3B;
+    background-color: #D8E7C5;
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #6B4F3B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cell:hover {
+    background-color: #e0e0e0;
+}
+
+#status {
+    font-size: 24px;
+    margin: 20px;
+    font-weight: bold;
+}

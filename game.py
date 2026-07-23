@@ -1,38 +1,62 @@
-squares = [' ']*9
+from js import document
+from pyodide import create_proxy
+
+# initializing game's state
+squares = [' '] * 9
 players = 'XO'
-board = '''
-  0   1   2
-  {0} | {1} | {2}
- -----------
-3 {3} | {4} | {5} 5
- -----------
-  {6} | {7} | {8}
-  6   7   8
-'''
+
+# winning conditions
 win_conditions = [
-    (0, 1, 2), (3, 4, 5), (6, 7, 8), 
-    # horizontals
-    (0, 3, 6), (1, 4, 7), (2, 5, 8), 
-    # verticals
-    (0, 4, 8), (2, 4, 6)             
-    # diagonals
+    (0, 1, 2), (3, 4, 5), (6, 7, 8),
+    (0, 3, 6), (1, 4, 7), (2, 5, 8),
+    (0, 4, 8), (2, 4, 6)
 ]
 
 def check_win(player):
     for a, b, c in win_conditions:
-        if {squares[a], squares[b], squares[c]} == {player}:
+        if squares[a] == squares[b] == squares[c] == player:
             return True
+    return False
 
-while True:
-    print(board.format(*squares))
-    if check_win(players[1]):
-        print(f'{players[1]} is the winner!')
-        break
-    if ' ' not in squares:
-        print('Cats game!')
-        break
-    move = input(f'{players[0]} to move [0-8] > ')
-    if not move.isdigit() or not 0 <= int(move) <= 8 or squares[int(move)] != ' ':
-        print('Invalid move!')
-        continue
-    squares[int(move)], players = players[0], players[::-1]
+def update_board():
+    board_html = """
+    <div class="board">
+        <div class="row">
+            <div class="cell" onclick="make_move(0)">{}</div>
+            <div class="cell" onclick="make_move(1)">{}</div>
+            <div class="cell" onclick="make_move(2)">{}</div>
+        </div>
+        <div class="row">
+            <div class="cell" onclick="make_move(3)">{}</div>
+            <div class="cell" onclick="make_move(4)">{}</div>
+            <div class="cell" onclick="make_move(5)">{}</div>
+        </div>
+        <div class="row">
+            <div class="cell" onclick="make_move(6)">{}</div>
+            <div class="cell" onclick="make_move(7)">{}</div>
+            <div class="cell" onclick="make_move(8)">{}</div>
+        </div>
+    </div>
+    """.format(*squares)
+    board_element = document.getElementById("board")
+    board_element.innerHTML = board_html
+
+def make_move(move):
+    global players
+    if squares[move] == ' ':
+        squares[move] = players 
+        if check_win(players):
+            update_board()
+            document.getElementById("status").innerHTML = f'<b>{players} wins!</b>'
+            return
+        if ' ' not in squares:
+            update_board()
+            document.getElementById("status").innerHTML = '<b>Cat\'s game!</b>'
+            return
+        players = players[::-1]  # switch players
+        document.getElementById("status").innerHTML = f'<b>{players}\'s turn</b>'
+        update_board()
+
+# initialize the game
+update_board()
+document.getElementById("status").innerHTML = f'<b>{players}\'s turn</b>'
