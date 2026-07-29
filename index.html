@@ -10,9 +10,25 @@
     </head>
 
     <body>
-        <h1>PyScript Tic Tac Toe</h1>
+        <h1>Triple Scoop</h1>
+
+        <div id="scoreboard">
+            <div class="score">
+                🍓 <span id="x-score">0</span>
+            </div>
+
+            <div class="score">
+                🍫 <span id="o-score">0</span>
+            </div>
+        </div>
+
         <div id="status"></div>
         <div id="board"></div>
+
+        <button id="restart">
+            Play Again!
+        </button>
+
         <script type="py" src="./game.py"></script>
     </body>
 </html>
