@@ -29,6 +29,24 @@ body {
     box-shadow: 0 12px 30px rgba(0,0,0,.08);
 }
 
+/* scoreboard */
+#scoreboard{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.score{
+    background: var(--vanilla);
+    color: var(--dark-chocolate);
+
+    padding: 12px 24px;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
 h1 {
     color: var(--dark-chocolate);
 }
@@ -80,20 +98,21 @@ h1 {
 }
 
 /* buttons */
-button{
+#restart{
     background: var(--bubble-gum);
     color: var(--dark-chocolate);
 
+    margin-top: 25px;
+    padding: 12px 28px;
     border: none;
     border-radius: 18px;
-    padding: 12px 28px;
     cursor: pointer;
     font-size: 18px;
     transition: .2s;
 }
 
-button:hover{
-    transform: translate(-2px);
+#restart:hover{
+    transform: scale(1.05);
     background: var(--coffee-bean);
     color: white;
 }

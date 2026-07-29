@@ -6,6 +6,9 @@ squares = [' '] * 9
 current_player = 'X'
 game_over = False
 
+x_score = 0
+o_score = 0
+
 # winning conditions
 win_conditions = [
     (0, 1, 2), (3, 4, 5), (6, 7, 8),
