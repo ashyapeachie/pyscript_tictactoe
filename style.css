@@ -14,20 +14,23 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background-color: var(--cream);
+}
+
+.container{
     text-align: center;
-    margin: 20px;
-    background-color: #F8F5EF;
 }
 
 h1 {
-    color: #6B4F3B;
+    color: var(--brown);
 }
 
 .board {
-    display: inline-block;
-    margin: 20px auto;
-    border: 2px solid #6B4F3B;
-    background-color: #D8E7C5;
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    gap: 10px;
+    justify-content: center;
 }
 
 .row {
@@ -35,19 +38,22 @@ h1 {
 }
 
 .cell {
-    width: 80px;
-    height: 80px;
-    border: 2px solid #6B4F3B;
+    width: 100px;
+    height: 100px;
+    background: var(--sage-green);
+    border-radius: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 48px;
     font-weight: bold;
     cursor: pointer;
+    transition: .2s;
 }
 
 .cell:hover {
-    background-color: #e0e0e0;
+    background-color: var(--rose-pink);
+    transform: scale(1.05);
 }
 
 #status {
