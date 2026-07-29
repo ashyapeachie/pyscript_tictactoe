@@ -61,4 +61,4 @@ def make_move(move):
 
 # initialize the game
 update_board()
-document.getElementById("status").innerHTML = "Python is running!"
+document.getElementById("status").innerHTML = f'<b>{players}\'s turn</b>'
