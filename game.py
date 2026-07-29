@@ -1,9 +1,10 @@
 from js import document
-from pyscript import when
+from pyodide.ffi import create_proxy
 
 # initializing game's state
 squares = [' '] * 9
 current_player = 'X'
+game_over = False
 
 # winning conditions
 win_conditions = [
@@ -12,11 +13,16 @@ win_conditions = [
     (0, 4, 8), (2, 4, 6)
 ]
 
-game_over = False
+# checking who the winner is
+def check_win(player):
+    for a, b, c in win_conditions:
+        if squares[a] == squares[b] == squares[c] == player:
+            return True
+    return False
 
 # the board
 def draw_board(): 
-    board=document.getElementsById("board")
+    board = document.getElementsById("board")
     board.innerHTML=""
     board.className="board"
 
@@ -29,50 +35,51 @@ def draw_board():
 
         cell.addEventListener(
             "click",
-            lambda e,index=i: make_move(index)
+            create_proxy(lambda e, index=i: make_move(index))
         )
+        #event handler
 
-def update_board():
-    board_html = """
-    <div class="board">
-        <div class="row">
-            <div class="cell" onclick="make_move(0)">{}</div>
-            <div class="cell" onclick="make_move(1)">{}</div>
-            <div class="cell" onclick="make_move(2)">{}</div>
-        </div>
+# making a move
+def make_move(index):
+    global current_player
+    global game_over
 
-        <div class="row">
-            <div class="cell" onclick="make_move(3)">{}</div>
-            <div class="cell" onclick="make_move(4)">{}</div>
-            <div class="cell" onclick="make_move(5)">{}</div>
-        </div>
+    if game_over:
+        return
 
-        <div class="row">
-            <div class="cell" onclick="make_move(6)">{}</div>
-            <div class="cell" onclick="make_move(7)">{}</div>
-            <div class="cell" onclick="make_move(8)">{}</div>
-        </div>
-    </div>
-    """.format(*squares)
-    board_element = document.getElementById("board")
-    board_element.innerHTML = board_html
+    if squares[index]!=" ":
+        return
 
-def make_move(move):
-    global players
-    if squares[move] == ' ':
-        squares[move] = players 
-        if check_win(players):
-            update_board()
-            document.getElementById("status").innerHTML = f'<b>{players} wins!</b>'
-            return
-        if ' ' not in squares:
-            update_board()
-            document.getElementById("status").innerHTML = '<b>Cat\'s game!</b>'
-            return
-        players = players[::-1]  # switch players
-        document.getElementById("status").innerHTML = f'<b>{players}\'s turn</b>'
-        update_board()
+    squares[index]=current_player
+    draw_board()
 
-# initialize the game
-update_board()
-document.getElementById("status").innerHTML = f'<b>{players}\'s turn</b>'
+    if check_win(current_player):
+        document.getElementById(
+            "status"
+        ).innerHTML=f"{current_player} Wins!"
+
+        game_over=True
+
+        return
+
+    if " " not in squares:
+        document.getElementById(
+            "status"
+        ).innerHTML="Cat's Game!"
+
+        game_over=True
+
+        return
+
+    if current_player=="X":
+        current_player="O"
+    else:
+        current_player="X"
+
+    document.getElementById(
+        "status"
+    ).innerHTML=f"{current_player}'s Turn"
+
+# starting the game
+draw_board()
+document.getElementById("status").innerHTML="X's Turn"
