@@ -1,14 +1,12 @@
-/* colors */
+/* neapolitan color palette */
 :root {
-    --matcha-green: #A8C686;
-    --sage-green: #D8E7C5;
+    --bubble-gum: #ffc3c8;
 
-    --cream: #FFF8F0;
-    --warm-white: #F8F5EF;
+    --cream: #ffffeb;
 
-    --blush-pink: #F7C6D9;
-    --rose-pink: #DDA5B6;
-    --brown: #6B4F3B;
+    --vanilla: #dcc3a0;
+    --coffee-bean: #6f4e37;
+    --dark-chocolate: #443025;
 } 
 
 body {
@@ -22,7 +20,7 @@ body {
 }
 
 h1 {
-    color: var(--brown);
+    color: var(--dark-chocolate);
 }
 
 .board {
@@ -39,7 +37,7 @@ h1 {
 .cell {
     width: 100px;
     height: 100px;
-    background: var(--sage-green);
+    background: var(--vanilla);
     border-radius: 18px;
     display: flex;
     justify-content: center;
@@ -51,7 +49,7 @@ h1 {
 }
 
 .cell:hover {
-    background-color: var(--rose-pink);
+    background-color: var(--bubble-gum);
     transform: scale(1.05);
 }
 

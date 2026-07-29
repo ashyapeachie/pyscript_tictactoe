@@ -22,7 +22,7 @@ def check_win(player):
 
 # the board
 def draw_board(): 
-    board = document.getElementsById("board")
+    board = document.getElementById("board")
     board.innerHTML=""
     board.className="board"
 
