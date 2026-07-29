@@ -26,11 +26,13 @@ def update_board():
             <div class="cell" onclick="make_move(1)">{}</div>
             <div class="cell" onclick="make_move(2)">{}</div>
         </div>
+
         <div class="row">
             <div class="cell" onclick="make_move(3)">{}</div>
             <div class="cell" onclick="make_move(4)">{}</div>
             <div class="cell" onclick="make_move(5)">{}</div>
         </div>
+
         <div class="row">
             <div class="cell" onclick="make_move(6)">{}</div>
             <div class="cell" onclick="make_move(7)">{}</div>
@@ -59,4 +61,4 @@ def make_move(move):
 
 # initialize the game
 update_board()
-document.getElementById("status").innerHTML = f'<b>{players}\'s turn</b>'
+document.getElementById("status").innerHTML = "Python is running!"
