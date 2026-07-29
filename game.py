@@ -1,9 +1,9 @@
 from js import document
-from pyodide import create_proxy
+from pyscript import when
 
 # initializing game's state
 squares = [' '] * 9
-players = 'XO'
+current_player = 'X'
 
 # winning conditions
 win_conditions = [
@@ -12,11 +12,25 @@ win_conditions = [
     (0, 4, 8), (2, 4, 6)
 ]
 
-def check_win(player):
-    for a, b, c in win_conditions:
-        if squares[a] == squares[b] == squares[c] == player:
-            return True
-    return False
+game_over = False
+
+# the board
+def draw_board(): 
+    board=document.getElementsById("board")
+    board.innerHTML=""
+    board.className="board"
+
+    for i in range(9):
+        cell=document.createElement("div")
+        cell.className="cell"
+        cell.id=f"cell{i}"
+        cell.innerHTML=squares[i]
+        board.appendChild(cell)
+
+        cell.addEventListener(
+            "click",
+            lambda e,index=i: make_move(index)
+        )
 
 def update_board():
     board_html = """
