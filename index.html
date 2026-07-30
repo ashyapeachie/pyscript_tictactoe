@@ -10,25 +10,34 @@
     </head>
 
     <body>
-        <h1>Triple Scoop</h1>
+        <div class="container">
+            <h1>Triple Scoop</h1>
 
-        <div id="scoreboard">
-            <div class="score">
-                🍓 <span id="x-score">0</span>
-            </div>
+            <div class="game-layout">
+                <div class="left">
+                    <div id="scoreboard">
+                        <div class="score">
+                            🍓 <span id="x-score">0</span>
+                        </div>
 
-            <div class="score">
-                🍫 <span id="o-score">0</span>
+                        <div class="score">
+                            🍫 <span id="o-score">0</span>
+                        </div>
+
+                        <div id="status"></div>
+        
+                        <div id="board"></div>
+
+                        <button id="restart">
+                            ♡ New Round ♡
+                        </button>
+                    </div>
+
+                    <div id="board"></div>
+                </div>
             </div>
         </div>
-
-        <div id="status"></div>
-        <div id="board"></div>
-
-        <button id="restart">
-            Play Again!
-        </button>
-
-        <script type="py" src="./game.py"></script>
+        
+        <script type="py" src="./game.py"></script> 
     </body>
 </html>

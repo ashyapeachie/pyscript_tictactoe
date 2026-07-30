@@ -1,7 +1,7 @@
 from js import document
 from pyodide.ffi import create_proxy
 
-# initializing game's state
+# game's state
 squares = [' '] * 9
 current_player = 'X'
 game_over = False
@@ -22,6 +22,16 @@ def check_win(player):
         if squares[a] == squares[b] == squares[c] == player:
             return True
     return False
+
+# scoreboard fuction
+def update_scoreboard():
+    document.getElementById(
+        "x-score"
+    ).innerHTML = x_score
+
+    document.getElementById(
+        "o-score"
+    ).innerHTML = o_score
 
 # the board
 def draw_board(): 
@@ -46,6 +56,8 @@ def draw_board():
 def make_move(index):
     global current_player
     global game_over
+    global x_score
+    global o_score
 
     if game_over:
         return
@@ -54,35 +66,83 @@ def make_move(index):
         return
 
     squares[index]=current_player
+    
     draw_board()
 
+    # winenr function
     if check_win(current_player):
+        global x_score
+        global o_score
+
+        if current_player == "X":
+            x_score += 1
+            winner = "🍓 Strawberry"
+        else:
+            o_score += 1
+            winner = "🍫 Chocolate"
+
+        update_scoreboard()
+
         document.getElementById(
             "status"
-        ).innerHTML=f"{current_player} Wins!"
+        ).innerHTML = f"{winner} Wins! 🎉"
 
-        game_over=True
-
+        game_over = True
         return
 
+    # draw function
     if " " not in squares:
         document.getElementById(
             "status"
-        ).innerHTML="Cat's Game!"
+        ).innerHTML = "🍦 Cat's Game!"
 
-        game_over=True
-
+        game_over = True
         return
 
-    if current_player=="X":
-        current_player="O"
+    # switching players fuction
+    if current_player == "X":
+        current_player = "O"
+        document.getElementById(
+            "status"
+        ).innerHTML = "🍫 Chocolate's Turn"
+
     else:
-        current_player="X"
+        current_player = "X"
+        document.getElementById(
+            "status"
+        ).innerHTML = "🍓 Strawberry's Turn"
+
+# restart function
+def restart_game(event=None):
+
+    global squares
+    global current_player
+    global game_over
+
+    squares = [" "] * 9
+
+    current_player = "X"
+
+    game_over = False
+
+    draw_board()
 
     document.getElementById(
         "status"
-    ).innerHTML=f"{current_player}'s Turn"
+    ).innerHTML = "🍓 Strawberry's Turn"
 
 # starting the game
 draw_board()
-document.getElementById("status").innerHTML="X's Turn"
+update_scoreboard
+
+document.getElementById(
+    "status"
+).innerHTML="🍓 Strawberry's Turn"
+
+# restarting the game
+restart_button = document.getElementById("restart")
+
+restart_button.addEventListener(
+    "click",
+    create_proxy(restart_game)
+)

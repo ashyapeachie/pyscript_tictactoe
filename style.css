@@ -29,6 +29,22 @@ body {
     box-shadow: 0 12px 30px rgba(0,0,0,.08);
 }
 
+/* layout */
+.game-layout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    margin-top: 40px;
+}
+
+.left{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 250px;
+}
+
 /* scoreboard */
 #scoreboard{
     display: flex;
