@@ -1,3 +1,5 @@
+import random
+
 from js import document
 from pyodide.ffi import create_proxy
 
@@ -40,77 +42,128 @@ def draw_board():
     board.className="board"
 
     for i in range(9):
-        cell=document.createElement("div")
-        cell.className="cell"
-        cell.id=f"cell{i}"
-        cell.innerHTML=squares[i]
+        cell = document.createElement("div")
+        cell.className = "cell"
+
+        if squares[i] == "X":
+            cell.classList.add("x")
+        elif squares[i] == "O":
+            cell.classList.add("o")
+
+        cell.innerHTML = squares[i]
         board.appendChild(cell)
 
         cell.addEventListener(
             "click",
             create_proxy(lambda e, index=i: make_move(index))
         )
-        #event handler
+        # event handler
 
-# making a move
+# human making a move
 def make_move(index):
+
     global current_player
     global game_over
     global x_score
-    global o_score
 
     if game_over:
         return
 
-    if squares[index]!=" ":
+    if current_player != "X":
         return
 
-    squares[index]=current_player
-    
+    if squares[index] != " ":
+        return
+
+    squares[index] = "X"
     draw_board()
 
-    # winenr function
-    if check_win(current_player):
-        global x_score
-        global o_score
-
-        if current_player == "X":
-            x_score += 1
-            winner = "🍓 Strawberry"
-        else:
-            o_score += 1
-            winner = "🍫 Chocolate"
-
+    if check_win("X"):
+        x_score += 1
         update_scoreboard()
 
         document.getElementById(
             "status"
-        ).innerHTML = f"{winner} Wins! 🎉"
+        ).innerHTML = "🍓 You Win!"
+
+        document.getElementById(
+            "restart"
+        ).innerHTML = "♡ New Round ♡"
 
         game_over = True
         return
 
-    # draw function
     if " " not in squares:
         document.getElementById(
             "status"
         ).innerHTML = "🍦 Cat's Game!"
 
+        document.getElementById(
+            "restart"
+        ).innerHTML = "♡ New Round ♡"
+
         game_over = True
         return
 
-    # switching players fuction
-    if current_player == "X":
-        current_player = "O"
-        document.getElementById(
-            "status"
-        ).innerHTML = "🍫 Chocolate's Turn"
+    current_player = "O"
 
-    else:
-        current_player = "X"
+    document.getElementById(
+        "status"
+    ).innerHTML = "🍫 Computer Thinking..."
+
+    computer_move()
+
+# ai / computer move
+def computer_move():
+    global current_player
+    global game_over
+    global o_score
+
+    available = []
+
+    for i in range(9):
+        if squares[i] == " ":
+            available.append(i)
+
+    if len(available) == 0:
+        return
+
+    move = random.choice(available)
+    squares[move] = "O"
+    draw_board()
+
+    if check_win("O"):
+        o_score += 1
+        update_scoreboard()
+
         document.getElementById(
             "status"
-        ).innerHTML = "🍓 Strawberry's Turn"
+        ).innerHTML = "🍫 Computer Wins!"
+
+        document.getElementById(
+            "restart"
+        ).innerHTML = "♡ New Round ♡"
+
+        game_over = True
+        return
+
+    if " " not in squares:
+        document.getElementById(
+            "status"
+        ).innerHTML = "🍦 Cat's Game!"
+
+        document.getElementById(
+            "restart"
+        ).innerHTML = "♡ New Round ♡"
+
+        game_over = True
+        return
+
+    current_player = "X"
+
+    document.getElementById(
+        "status"
+    ).innerHTML = "🍓 Your Turn"
 
 # restart function
 def restart_game(event=None):
@@ -129,17 +182,20 @@ def restart_game(event=None):
 
     document.getElementById(
         "status"
-    ).innerHTML = "🍓 Strawberry's Turn"
+    ).innerHTML = "🍓 Your Turn"
 
-# starting the game
+    document.getElementById(
+        "restart"
+    ).innerHTML = "♡ Restart ♡"
+
+# initializing the game
 draw_board()
 update_scoreboard
 
 document.getElementById(
     "status"
-).innerHTML="🍓 Strawberry's Turn"
+).innerHTML = "🍓 Your Turn"
 
-# restarting the game
 restart_button = document.getElementById("restart")
 
 restart_button.addEventListener(
