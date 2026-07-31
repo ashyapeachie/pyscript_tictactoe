@@ -135,9 +135,9 @@ h1 {
 
 /* players */
 .x{
-    color: var(--bubble-gum);
+    color: var(--bubble-gum); /* human */
 }
 
 .o{
-    color: var(--coffee-bean);
+    color: var(--coffee-bean); /* computer */
 }
