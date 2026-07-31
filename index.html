@@ -3,41 +3,54 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tic Tac Toe with PyScript</title>
+
+        <title>Triple Scoop</title>
+
+        <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+        <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
+
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://pyscript.net/releases/2025.3.1/core.css">
-        <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script>
     </head>
 
     <body>
         <div class="container">
-            <h1>Triple Scoop</h1>
 
-            <div class="game-layout">
-                <div class="left">
-                    <div id="scoreboard">
-                        <div class="score">
-                            🍓 <span id="x-score">0</span>
-                        </div>
+        <h1>Triple Scoop</h1>
 
-                        <div class="score">
-                            🍫 <span id="o-score">0</span>
-                        </div>
+        <div class="game-layout">
+            <div class="left-panel">
 
-                        <div id="status"></div>
-        
-                        <div id="board"></div>
-
-                        <button id="restart">
-                            ♡ New Round ♡
-                        </button>
+                <div id="scoreboard">
+                    <div class="score">
+                        🍓 <span id="x-score">0</span>
                     </div>
 
-                    <div id="board"></div>
+                    <div class="score">
+                        🍫 <span id="o-score">0</span>
+                    </div>
                 </div>
+
+                <div id="status">
+                    🍓 Your Turn
+                </div>
+
+                <button id="restart">
+                     Restart 
+                </button>
+
             </div>
+
+            <div id="board"></div>
         </div>
-        
-        <script type="py" src="./game.py"></script> 
+
+    </div>
+
+    <script type="py" src="./game.py"></script>
     </body>
 </html>

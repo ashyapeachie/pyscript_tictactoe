@@ -10,7 +10,7 @@
 } 
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Baloo 2", cursive;
     margin: 0;
     min-height: 100vh;
 
@@ -38,9 +38,10 @@ body {
     margin-top: 40px;
 }
 
-.left{
+.left-panel{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 25px;
     width: 250px;
 }
@@ -48,23 +49,18 @@ body {
 /* scoreboard */
 #scoreboard{
     display: flex;
-    justify-content: center;
     gap: 40px;
-    margin-bottom: 20px;
 }
 
 .score{
-    background: var(--vanilla);
-    color: var(--dark-chocolate);
-
-    padding: 12px 24px;
+    width: 90px;
     border-radius: 18px;
-    font-size: 22px;
-    font-weight: bold;
+    text-align:center;
 }
 
 h1 {
     color: var(--dark-chocolate);
+    font-weight: 700;
 }
 
 .board {
@@ -100,17 +96,7 @@ h1 {
 }
 
 #status {
-    display: inline-block;
-
-    background: var(--vanilla);
-    color: var(--dark-chocolate);
-
-    padding: 12px 24px;
-    border-radius: 30px;
-    margin: 25px;
-
-    font-size: 22px;
-    font-weight: bold;
+    border-radius: 18px;
 }
 
 /* buttons */

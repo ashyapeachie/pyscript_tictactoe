@@ -190,7 +190,7 @@ def restart_game(event=None):
 
 # initializing the game
 draw_board()
-update_scoreboard
+update_scoreboard()
 
 document.getElementById(
     "status"
