@@ -27,6 +27,14 @@ Triple Scoop is a ported command-line Python game turned browser-based applicati
 
 <img width="1240" height="580" alt="Screenshot_31-7-2026_191857_127 0 0 1" src="https://github.com/user-attachments/assets/7170dd62-810c-4cc9-9d92-13fa2ae13753" />
 
+## 🙏 Acknowledgements
+This project was inspired by an open-source Python Tic Tac Toe project from the Python Mini Projects repository.
+
+Original project:
+https://github.com/Python-World/python-mini-projects/tree/master/projects/Tic_tac_toe
+
+While the original version was a console-based Python game, I adapted and expanded it into a browser application using PyScript, HTML, and CSS. I redesigned the interface, implemented a graphical game board, added a computer opponent, created a live scoreboard, and developed a custom dessert-themed user experience!
+
 ## 🍓 Author
 Ashya Hamer
 Computer Information Technology Student 
