@@ -45,12 +45,17 @@ def draw_board():
         cell = document.createElement("div")
         cell.className = "cell"
 
-        if squares[i] == "X":
+        display = squares[i]
+
+        if display == "X":
+            display = "🍓"
             cell.classList.add("x")
-        elif squares[i] == "O":
+
+        elif display == "O":
+            display = "🍫"
             cell.classList.add("o")
 
-        cell.innerHTML = squares[i]
+        cell.innerHTML = display
         board.appendChild(cell)
 
         cell.addEventListener(
