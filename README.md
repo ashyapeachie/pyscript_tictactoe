@@ -1,8 +1,8 @@
 # Pyscript to Tic Tac Toe 🍨
 
 ## 📖 Project Overview 
-Triple Scoop is a ported command-line Python game turned browser-based application using PyScript, HTML, and CSS
-check it out here: https://ashyapeachie.github.io/pyscript_tictactoe/ 
+Triple Scoop is a ported command-line Python game turned browser-based application using PyScript, HTML, and CSS.
+Check it out here: https://ashyapeachie.github.io/pyscript_tictactoe/ 
 
 ## 🍫 Features
 - human vs computer gameplay
